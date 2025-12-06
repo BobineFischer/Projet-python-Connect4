@@ -41,7 +41,7 @@ Nous avons suivi une approche incrémentale, décomposée en 5 exercices, pour p
 * **Objectif :** Mise en place d'une suite de tests (Pytest) et d'un script d'arène pour faire s'affronter nos différentes versions d'agents et valider les améliorations.
 
 ### Exercice 5 : Agent Avancé (Minimax & Optimisations)
-* **Objectif :** L'agent final soumis sur ML-Arena (`agent.py`), avec nom d'agent:**SmokeFish1.3**
+* **Objectif :** L'agent final soumis sur ML-Arena (`agent.py`), avec nom d'agent: **SmokeFish1.3**
 * **Technologies utilisées :**
     * **Bitboards :** Utilisation d'entiers 64-bits pour représenter le plateau, permettant des calculs de victoire ultra-rapides via opérations binaires.
     * **PVS (Principal Variation Search) :** Amélioration de l'Alpha-Beta pour explorer l'arbre de jeu plus efficacement.
