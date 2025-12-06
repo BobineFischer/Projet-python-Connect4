@@ -1,8 +1,5 @@
 # Projet Python - Connect 4 (Puissance 4)
 
-![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
-![PettingZoo](https://img.shields.io/badge/PettingZoo-Classic-green)
-![Status](https://img.shields.io/badge/Status-Exercice_5_Completed-success)
 
 ## Description du Projet
 
