@@ -3,7 +3,7 @@
 
 ## Description du Projet
 
-Ce projet a été réalisé dans le cadre du cours de Python. L'objectif est de développer un agent autonome capable de jouer au **Puissance 4 (Connect 4)** de manière optimale.
+Ce projet a été réalisé dans le cadre du cours de Python par Houlda Bisse Zoobo et Baiyi REN. L'objectif est de développer un agent autonome capable de jouer au **Puissance 4 (Connect 4)** de manière optimale.
 
 Le projet s'appuie sur le framework **PettingZoo** pour la simulation de l'environnement et vise la compétition sur la plateforme **ML-Arena**, avec des contraintes strictes :
 * **Temps :** Max 3 secondes par coup.
