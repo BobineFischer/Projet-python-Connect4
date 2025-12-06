@@ -1,71 +1,62 @@
-# Projet Python Connect 4
+# Projet Python - Connect 4 (Puissance 4)
 
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
-![Numpy](https://img.shields.io/badge/Numpy-Required-orange)
-![License](https://img.shields.io/badge/License-MIT-green)
+![PettingZoo](https://img.shields.io/badge/PettingZoo-Classic-green)
+![Status](https://img.shields.io/badge/Status-Exercice_5_Completed-success)
 
-## Introduction
+## Description du Projet
 
-Bienvenue dans le dépôt **Projet-python-Connect4**. Ce projet implémente un agent d'intelligence artificielle performant pour le jeu de **Puissance 4** (Connect 4).
+Ce projet a été réalisé dans le cadre du cours de Python. L'objectif est de développer un agent autonome capable de jouer au **Puissance 4 (Connect 4)** de manière optimale.
 
-L'objectif principal était de concevoir une IA capable de jouer en temps réel avec des contraintes de temps strictes, tout en maximisant la profondeur de recherche grâce à des techniques d'optimisation avancées comme les **Bitboards** et la recherche **PVS (Principal Variation Search)**.
-
----
-
-## Fonctionnalités Clés
-
-L'agent (`agent.py`) intègre plusieurs stratégies d'optimisation algorithmique :
-
-### Algorithmes de Recherche
-* **Principal Variation Search (PVS) :** Une variante optimisée de l'algorithme Minimax Alpha-Beta. Elle assume que le premier coup exploré est le meilleur, réduisant ainsi la fenêtre de recherche pour les coups suivants.
-* **Approfondissement Itératif (Iterative Deepening) :** L'IA explore le jeu profondeur par profondeur (1, 2, 3...) jusqu'à épuisement du temps imparti, garantissant toujours une réponse valide même en cas d'interruption.
-* **Table de Transposition (TT) :** Mise en cache des positions déjà évaluées (limitée à 5 millions d'entrées) pour éviter les recalculs coûteux.
-
-### Optimisation des Performances
-* **Bitboards (Opérations Binaires) :** Le plateau de jeu est représenté par deux entiers de 64 bits (un pour le joueur, un pour le masque global). Cela permet de vérifier les victoires et de générer les coups via des opérations bit à bit (`&`, `|`, `<<`) extrêmement rapides.
-* **Gestion du Temps Dynamique :**
-    * **Time Bank :** L'agent accumule du temps lorsqu'il joue rapidement les coups forcés, pour le réinvestir dans les phases critiques du milieu de jeu.
-    * **Sécurité GC :** La taille des structures de données est contrôlée pour éviter les latences dues au Garbage Collector de Python.
-
-### Connaissances de Jeu
-* **Bibliothèque d'Ouvertures :** Les premiers coups sont joués instantanément grâce à une base de données d'ouvertures pré-calculées.
-* **Heuristiques :** Évaluation positionnelle basée sur le contrôle du centre, les menaces immédiates et la parité (stratégie pair/impair pour les fins de partie).
+Le projet s'appuie sur le framework **PettingZoo** pour la simulation de l'environnement et vise la compétition sur la plateforme **ML-Arena**, avec des contraintes strictes :
+* **Temps :** Max 3 secondes par coup.
+* **Mémoire :** Max 384 Mo.
+* **CPU :** 1 cœur.
 
 ---
 
-## Installation et Prérequis
+## Progression du Projet
 
-Ce projet nécessite **Python 3** et la bibliothèque **NumPy**.
+Nous avons suivi une approche incrémentale, décomposée en 5 exercices, pour passer d'une compréhension basique à une IA compétitive.
 
-1.  **Cloner le dépôt :**
-    ```bash
-    git clone [https://github.com/BobineFischer/Projet-python-Connect4.git](https://github.com/BobineFischer/Projet-python-Connect4.git)
-    cd Projet-python-Connect4
-    ```
+### Exercice 1 : Analyse et Modélisation
+* **Objectif :** Comprendre l'environnement PettingZoo et les règles.
+* **Analyse :**
+    * Le plateau est une grille de 6 rangées x 7 colonnes.
+    * L'observation est une matrice `(6, 7, 2)` représentant les pions des deux joueurs.
+    * L'importance de l'`action_mask` pour filtrer les coups illégaux (colonnes pleines).
 
-2.  **Installer les dépendances :**
-    ```bash
-    pip install numpy
-    ```
+### Exercice 2 : Agent Aléatoire (Baseline)
+* **Objectif :** Créer un agent jouant des coups valides au hasard pour établir une base de performance.
+* **Résultats de l'analyse statistique (sur 600 parties) :**
+    * **Avantage du premier joueur (Player 0) :** Gagne entre 50% et 70% des parties.
+    * **Durée moyenne :** ~22 coups par partie.
+    * **Matchs nuls :** Très rares (< 3%).
+
+### Exercice 3 : Agent "Smart" (Heuristique)
+* **Objectif :** Implémenter des règles logiques simples.
+* **Stratégie implémentée :**
+    1.  **Victoire immédiate :** Si un coup permet d'aligner 4 pions, le jouer.
+    2.  **Blocage :** Si l'adversaire peut gagner au prochain tour, le bloquer.
+    3.  **Occupation du centre :** Privilégier la colonne centrale (plus d'opportunités d'alignements).
+
+### Exercice 4 : Tests et Tournois (Validation)
+* **Objectif :** Mise en place d'une suite de tests (Pytest) et d'un script d'arène pour faire s'affronter nos différentes versions d'agents et valider les améliorations.
+
+### Exercice 5 : Agent Avancé (Minimax & Optimisations)
+* **Objectif :** L'agent final soumis sur ML-Arena (`agent.py`), avec nom d'agent:**SmokeFish1.3**
+* **Technologies utilisées :**
+    * **Bitboards :** Utilisation d'entiers 64-bits pour représenter le plateau, permettant des calculs de victoire ultra-rapides via opérations binaires.
+    * **PVS (Principal Variation Search) :** Amélioration de l'Alpha-Beta pour explorer l'arbre de jeu plus efficacement.
+    * **Iterative Deepening :** Recherche progressive pour garantir une réponse valide même si le temps est écoulé.
+    * **Gestion du Temps :** Système de "Time Bank" pour accumuler du temps sur les coups faciles et réfléchir plus longtemps aux moments critiques.
 
 ---
 
-## Utilisation
+## Installation et Utilisation
 
-L'agent est encapsulé dans la classe `Agent` située dans le fichier `agent.py`. Voici un exemple d'intégration :
+### Prérequis
+Le projet nécessite Python 3.8+ et les bibliothèques suivantes :
 
-```python
-from agent import Agent
-import numpy as np
-
-# Initialisation de l'agent
-ai_player = Agent()
-
-# Exemple d'observation (format tableau numpy 6x7x2 ou dictionnaire)
-# Ici, une grille vide pour l'exemple
-observation = np.zeros((6, 7, 2))
-
-# L'IA choisit une colonne (0-6)
-colonne_choisie = ai_player.choose_action(observation)
-
-print(f"L'IA a choisi de jouer dans la colonne : {colonne_choisie}")
+```bash
+pip install pettingzoo[classic] numpy pytest
